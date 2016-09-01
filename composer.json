@@ -1,0 +1,25 @@
+{
+  "name": "mycontroller/ucclient",
+  "description": "uc_client for Laravel5, Based on wehnhew/laravel4-ucenter",
+  "keywords": ["laravel5", "ucenter", "uc_client"],
+  "homepage": "https://github.com/mycontroller/ucclient",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "wehnhew, MyController",
+      "email": "mycontroller@163.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.5.9",
+    "illuminate/http": "5.1.*",
+    "illuminate/routing": "5.1.*",
+    "illuminate/session": "5.1.*",
+    "illuminate/support": "5.1.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "MyController\\UCClient\\": "src/"
+    }
+  }
+}
