@@ -72,7 +72,10 @@
  
 然后在 App\Providers\AppServiceProvider 的 register方法 里增加:
   ```shell
-  $this->app->bind('MyController\UCClient\Contracts\UCenterSSOContract', 'App\MyUCenterSSO');
+  $this->app->bind(
+      \MyController\UCClient\Contracts\UCenterSSOContract::class,
+      \App\MyUCenterSSO::class
+  );
   ```
   
 ## 避免开启了 barryvdh/laravel-debugbar 插件后影响 UCenterAPI 的输出结果
@@ -104,7 +107,10 @@
  
 然后在 App\Providers\AppServiceProvider 的 register方法 里增加:
   ```shell
-  $this->app->bind('MyController\UCClient\Contracts\UCenterAPIExecuteFilterContract', 'App\MyUCenterAPIExecuteFilter');
+  $this->app->bind(
+      \MyController\UCClient\Contracts\UCenterAPIExecuteFilterContract::class,
+      \App\MyUCenterAPIExecuteFilter::class
+  );
   ```
   
 ## License
