@@ -28,7 +28,7 @@ defined('API_RETURN_SUCCEED') or define('API_RETURN_SUCCEED', 1);
 defined('API_RETURN_FAILED') or define('API_RETURN_FAILED', -1);
 defined('API_RETURN_FORBIDDEN') or define('API_RETURN_FORBIDDEN', -2);
 
-defined('UC_KEY') or define('UC_KEY', Config::get('uc-client.key'));
+defined('UC_KEY') or define('UC_KEY', config('uc-client.key'));
 
 defined('API_ROOT') or define('API_ROOT', __DIR__ . '/../');
 

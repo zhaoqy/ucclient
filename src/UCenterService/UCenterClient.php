@@ -5,7 +5,7 @@ namespace MyController\UCClient\UCenterService;
 use Illuminate\Support\Facades\Config;
 
 if (!defined('UC_API')) {
-    $config = Config::get('uc-client');
+    $config = config('uc-client');
     defined('UC_CONNECT') or define('UC_CONNECT', $config['connect']);
     defined('UC_DBHOST') or define('UC_DBHOST', $config['dbhost']);
     defined('UC_DBUSER') or define('UC_DBUSER', $config['dbuser']);
