@@ -20,14 +20,27 @@ class UCenterServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // Publish configuration files
         $configPath = __DIR__ . '/../../config/uc-client.php';
-        $this->publishes([$configPath => config_path('uc-client.php')], 'config');
+        if (function_exists('config_path')) {
+            $publishPath = config_path('uc-client.php');
+        } else {
+            $publishPath = base_path('config/uc-client.php');
+        }
+        $this->publishes([$configPath => $publishPath], 'config');
 
         // HTTP routing
-        $this->app['router']->any($this->app['config']->get('uc-client.url', '/api/uc'), function () {
-            return UCenterAPI::execute(app('MyController\UCClient\Contracts\UCenterAPIExecuteFilterContract'));
-        });
+        if (strpos($this->app->version(), 'Lumen') !== false) {
+            $this->app->get($this->app['config']->get('uc-client.url', '/api/uc'), function () {
+                return UCenterAPI::execute(app('MyController\UCClient\Contracts\UCenterAPIExecuteFilterContract'));
+            });
+            $this->app->post($this->app['config']->get('uc-client.url', '/api/uc'), function () {
+                return UCenterAPI::execute(app('MyController\UCClient\Contracts\UCenterAPIExecuteFilterContract'));
+            });
+        } else {
+            $this->app['router']->any($this->app['config']->get('uc-client.url', '/api/uc'), function () {
+                return UCenterAPI::execute(app('MyController\UCClient\Contracts\UCenterAPIExecuteFilterContract'));
+            });
+        }
     }
 
     /**
