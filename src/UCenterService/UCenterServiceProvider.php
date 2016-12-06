@@ -37,9 +37,17 @@ class UCenterServiceProvider extends ServiceProvider
                 return UCenterAPI::execute(app('MyController\UCClient\Contracts\UCenterAPIExecuteFilterContract'));
             });
         } else {
-            $this->app['router']->any($this->app['config']->get('uc-client.url', '/api/uc'), function () {
-                return UCenterAPI::execute(app('MyController\UCClient\Contracts\UCenterAPIExecuteFilterContract'));
-            });
+            if (strpos($this->app->version(), '5.2.') !== false || strpos($this->app->version(), '5.3.') !== false) {
+                $this->app['router']->group(['middleware' => 'web',], function () {
+                    $this->app['router']->any($this->app['config']->get('uc-client.url', '/api/uc'), function () {
+                        return UCenterAPI::execute(app('MyController\UCClient\Contracts\UCenterAPIExecuteFilterContract'));
+                    });
+                });
+            } else {
+                $this->app['router']->any($this->app['config']->get('uc-client.url', '/api/uc'), function () {
+                    return UCenterAPI::execute(app('MyController\UCClient\Contracts\UCenterAPIExecuteFilterContract'));
+                });
+            }
         }
     }
 
